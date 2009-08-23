@@ -1,0 +1,7 @@
+(/|\\|^).*\.pyc$
+(/|\\|)dropin\.cache$
+(/|\\|^)twistd\.log$
+(/|\\|^)dnotify\.log$
+(/|\\|^).*\.pid$
+^_trial_temp
+^build/
