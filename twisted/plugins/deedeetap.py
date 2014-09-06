@@ -1,5 +1,5 @@
 """
-Twistd plugin to run DDM.
+Twistd plugin to run Deedee.
 
 Twisted 2.5 or later is required to use this.
 """
@@ -16,7 +16,7 @@ class Options(usage.Options):
     optFlags = [['dev', None, 'Enable development features such as /sandbox']]
 
 
-class DDMServerMaker(object):
+class DeedeeServerMaker(object):
     """
     Framework boilerplate class: This is used by twistd to get the service
     class.
@@ -25,13 +25,13 @@ class DDMServerMaker(object):
     the right makeService method to call.
     """
     implements(IServiceMaker, IPlugin)
-    tapname = "DDM"
-    description = "The DDM statblock generator"
+    tapname = "deedee"
+    description = "The Deedee statblock generator"
     options = Options
 
     def makeService(self, options):
         """
-        Construct the DDM
+        Construct the Deedee 
         """
         if options['dev']:
             try:
@@ -39,7 +39,7 @@ class DDMServerMaker(object):
                 wingdbstub
             except ImportError:
                 pass
-        from ddm.webserver import WebServer, WebSite
+        from deedee.webserver import WebServer, WebSite
         site = WebSite()
         ws = WebServer(int(options['port']), site)
         ws.site = site
@@ -50,4 +50,4 @@ class DDMServerMaker(object):
 # The name of this variable is irrelevant, as long as there is *some*
 # name bound to a provider of IPlugin and IServiceMaker.
 
-serviceMaker = DDMServerMaker()
+serviceMaker = DeedeeServerMaker()

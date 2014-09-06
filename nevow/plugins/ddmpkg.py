@@ -1,5 +1,5 @@
 from nevow import athena
 
-from ddm.util import RESOURCE
+from deedee.util import RESOURCE
 
-ddmPkg = athena.AutoJSPackage(RESOURCE('static'))
+deedeePkg = athena.AutoJSPackage(RESOURCE('static'))

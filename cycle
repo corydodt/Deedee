@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# run twistd ddm repeatedly, whenever a source file changes
+# run twistd deedee repeatedly, whenever a source file changes
 
 NOTIFY_FILES=('*.py' )
 
@@ -14,7 +14,7 @@ running() {
 }
 
 killTwistd() {
-    MAINPID=`cat ddm.pid 2> /dev/null`
+    MAINPID=`cat deedee.pid 2> /dev/null`
     if [ -z "$MAINPID" ]; then 
         return
     fi
@@ -53,8 +53,8 @@ _files=$(find . "${_notifyParameters[@]}" )
 # set up the command line options we will use
 [ -e ./options.local ] && source ./options.local
 inotifyOptions=${inotifyOptions:--e modify "${_files}"} 
-twistdOptions=${twistdOptions:--n --pidfile ddm.pid}
-ddmOptions=${ddmOptions:---dev}
+twistdOptions=${twistdOptions:--n --pidfile deedee.pid}
+deedeeOptions=${deedeeOptions:---dev}
 
 safeTTY() {
     tty="`tty`"
@@ -75,7 +75,7 @@ while true; do
   # Redirect stdin from our tty. If you don't do this, interactive pdb
   # doesn't work.
   echo RUNNING
-  twistd ${twistdOptions} DDM ${ddmOptions} <"`safeTTY`" &
+  twistd ${twistdOptions} deedee ${deedeeOptions} <"`safeTTY`" &
   inotifywait ${inotifyOptions}
 done
  
